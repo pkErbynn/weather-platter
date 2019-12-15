@@ -73,7 +73,8 @@ public class getWeatherData {
         // getting only keys
 //        locationList.stream().map(e -> e.getAsJsonObject().keySet()).forEach(System.out::println);
 
-//        locationList.stream().map(e -> new WeatherRecPojo()).forEach(System.out::println);
+//        locationList.stream().map(WeatherRecPojo::new).forEach(System.out::println);
+        locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).map(WeatherRecPojo::new).forEach(System.out::println);
 
     }
 

@@ -14,7 +14,12 @@ public class WeatherRecPojo {
     }
 
     public WeatherRecPojo(JsonElement element) {
-
+        this.setElevation(element.getAsJsonObject().get("elevation").toString());
+        this.setId(element.getAsJsonObject().get("id").toString());
+        this.setLatitude(element.getAsJsonObject().get("latitude").toString());
+        this.setLongitude(element.getAsJsonObject().get("longitude").toString());
+        this.setName(element.getAsJsonObject().get("name").toString());
+        this.setUnitaryAuthArea(element.getAsJsonObject().get("unitaryAuthArea").toString());
     }
 
     public String getElevation() {
