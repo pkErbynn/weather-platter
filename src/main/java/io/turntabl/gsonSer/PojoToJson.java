@@ -48,7 +48,7 @@ public class PojoToJson {
 
 class Run{
     public static void main(String[] args) {
-        PojoToJson pojo = new PojoToJson("John", "Erbynn", 24, "+233-55-347-2114", null);
+        PojoToJson pojo = new PojoToJson("John", "null", 24, "+233-55-347-2114", null);
 
         // Json Serialization
         Gson gson = new GsonBuilder().serializeNulls().setPrettyPrinting().create();
@@ -59,5 +59,9 @@ class Run{
         PojoToJson backToPojo = gson.fromJson(gsonPojo, PojoToJson.class);
         System.out.println(backToPojo);
         System.out.println("fname: " + backToPojo.getFname());
+
+
+        String weather;
+
     }
 }
