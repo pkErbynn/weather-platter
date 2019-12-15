@@ -58,11 +58,22 @@ public class getWeatherData {
 //                .collect(Collectors.toList());
 //        System.out.println(">>>> " + elevation);
 
-        Set<JsonElement> obsSource = locationList.stream().filter(e -> e.getAsJsonObject().keySet().contains("obsSource")).collect(Collectors.toSet());
+        // obsSource data filter
+//        Set<JsonElement> obsSource = locationList.stream().filter(e -> e.getAsJsonObject().keySet().contains("obsSource")).collect(Collectors.toSet());
 //        System.out.println(">>>> obs " + obsSource);
 //        locationList.stream().filter(e -> e.getAsJsonObject().keySet().contains("obsSource")).forEach(e -> System.out.println(e));
 //        long obsSource = locationList.stream().filter(e -> e.getAsJsonObject().keySet().contains("obsSource")).count();
+//        locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).forEach(System.out::println);
+//        long obsSourceCount = locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).count();
+//        System.out.println(obsSourceCount);
 
+        // getting only elevation values
+//        locationList.stream().map(e -> e.getAsJsonObject().get("elevation")).forEach(System.out::println);
+
+        // getting only keys
+//        locationList.stream().map(e -> e.getAsJsonObject().keySet()).forEach(System.out::println);
+
+//        locationList.stream().map(e -> new WeatherRecPojo()).forEach(System.out::println);
 
     }
 

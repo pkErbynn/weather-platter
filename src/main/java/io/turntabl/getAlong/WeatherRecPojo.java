@@ -1,5 +1,7 @@
 package io.turntabl.getAlong;
 
+import com.google.gson.JsonElement;
+
 public class WeatherRecPojo {
     private String elevation;
     private String id;
@@ -11,7 +13,9 @@ public class WeatherRecPojo {
     public WeatherRecPojo() {
     }
 
+    public WeatherRecPojo(JsonElement element) {
 
+    }
 
     public String getElevation() {
         return elevation;
@@ -59,5 +63,17 @@ public class WeatherRecPojo {
 
     public void setUnitaryAuthArea(String unitaryAuthArea) {
         this.unitaryAuthArea = unitaryAuthArea;
+    }
+
+    @Override
+    public String toString() {
+        return "WeatherRecPojo{" +
+                "elevation='" + elevation + '\'' +
+                ", id='" + id + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", name='" + name + '\'' +
+                ", unitaryAuthArea='" + unitaryAuthArea + '\'' +
+                '}';
     }
 }
