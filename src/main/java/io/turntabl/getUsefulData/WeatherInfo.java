@@ -44,7 +44,7 @@ public class WeatherInfo {
           Type listType = new TypeToken<List<JsonElement>>() {}.getType();
         List<JsonElement> yourList = new Gson().fromJson(locationJson, listType);
 
-//...        Stream<JsonElement> jsonElementStream = yourList.stream().filter(w -> !w.getAsJsonObject().keySet().contains("obsSource") && !w.isJsonNull()yourList);
+//...        Stream<JsonElement> jsonElementStream = yourList.stream().filter(w -> !w.getAsJsonObject().keySet().contains("obsSource") && !w.isJsonNull());
 //        Stream<WeatherPojo> weatherPojoStream = yourList.stream().filter(w -> !w.isJsonNull()
 //                && w.getAsJsonObject().keySet().contains("elevation")
 //                && w.getAsJsonObject().keySet().contains("region")
@@ -59,7 +59,8 @@ public class WeatherInfo {
         // jsonElementStream.map(WeatherPojo::new).forEach(System.out::println);
         //System.out.println(collect.contains("surrey"));
 
-//        JsonArray locSpecParamArray = locSpecElement.getAsJsonObject().get("SiteRep").getAsJsonObject().get("Wx").getAsJsonObject().get("Param").getAsJsonArray();
+//        JsonArray locSpecParamArray = locSpecElement.getAsJsonObject().get("SiteRep").getAsJsonObject().get("Wx")collect.getAsJsonObject().get("Param").getAsJsonArray();
+
 //        System.out.println(locSpecParamArray);
 
 //...        Set<JsonElement> collect = weatherPojoStream.map(w -> getAllForecastFromSites(w.getId())).
@@ -83,7 +84,7 @@ public class WeatherInfo {
 
 //        JsonElement locSpecElement = locParser.parse(locSpecBody);
 //        JsonObject locObj = locSpecElement.getAsJsonObject().get("SiteRep").getAsJsonObject().get("DV").getAsJsonObject();
-//        return locObj;yourList
+//        return locObj;
 //    }
 }
 

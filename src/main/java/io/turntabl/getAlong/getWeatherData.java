@@ -74,8 +74,45 @@ public class getWeatherData {
 //        locationList.stream().map(e -> e.getAsJsonObject().keySet()).forEach(System.out::println);
 
 //        locationList.stream().map(WeatherRecPojo::new).forEach(System.out::println);
-        locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).map(WeatherRecPojo::new).forEach(System.out::println);
+        // removed obsSource property on creation
+//        locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).map(WeatherRecPojo::new).forEach(System.out::println);
+//        Set<String> names = locationList.stream().filter(e -> !e.getAsJsonObject().keySet().contains("obsSource")).map(WeatherRecPojo::new).map(WeatherRecPojo::getName).collect(Collectors.toSet());
+//        System.out.println(names.size());
 
+//        JsonObject allWeatherForecastFromSites = getAllWeatherForecastFromSites("14");
+//        System.out.println(allWeatherForecastFromSites);
+//        JsonElement jsonElement1 = getAllWeatherForecastFromSites("14").get("Location");
+//        System.out.println(jsonElement1);
+
+        Stream<WeatherRecPojo> weatherRecPojoStream = locationList.stream().filter(w -> !w.isJsonNull()
+                && w.getAsJsonObject().keySet().contains("elevation")
+                && w.getAsJsonObject().keySet().contains("region")
+                && w.getAsJsonObject().keySet().contains("unitaryAuthArea")
+                && w.getAsJsonObject().keySet().contains("name")
+        ).map(WeatherRecPojo::new);
+        Set<JsonElement> collect = weatherRecPojoStream.map(e -> getAllWeatherForecastFromSites(e.getId()))         // comes with quotes eg..."scotland"...thus must eliminate "
+                .map(e -> e.get("Location").getAsJsonObject().get("country"))
+                .collect(Collectors.toSet());
+        System.out.println(collect);
+//        Set<String> collect = locationList.stream().map(WeatherRecPojo::new).map().collect(Collectors.toSet());
+//        System.out.println(collect.size());
+//        System.out.println(collect.contains("Surrey"));
+
+
+    }
+
+    public static JsonObject getAllWeatherForecastFromSites(String locid) {
+        HttpRequest locationSpecificReq = HttpRequest.newBuilder()
+                .uri(URI.create("http://datapoint.metoffice.gov.uk/public/data/val/wxfcs/all/json/" + locid + "?res=3hourly&key=ca3ee938-3ade-405e-adc1-38990741404b"))
+                .build();
+        HttpResponse<String> locationSpecReq = null;
+        try {locationSpecReq = HttpClient.newHttpClient().send(locationSpecificReq, HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {e.printStackTrace();}
+
+        JsonElement jsonElement = new JsonParser().parse(locationSpecReq.body());   // parse/convert it to valid json object
+        JsonObject asJsonObject = jsonElement.getAsJsonObject().get("SiteRep").getAsJsonObject().get("DV").getAsJsonObject();
+
+        return asJsonObject;
     }
 
 }
